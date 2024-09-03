@@ -1,3 +1,4 @@
+#BD em memória
 listaVeiculos = []
 
 def cadastrar():
@@ -8,6 +9,33 @@ def cadastrar():
     print("Digite o placa:")
     placa = input()
     listaVeiculos.append([marca, modelo, placa])
+
+def listar():
+    if len(listaVeiculos) == 0:
+        print ("Não existem veículos cadastrados")
+    else:
+        i = 1
+        for veiculo in listaVeiculos:
+            print(f"Veículo: {i}")
+            print(f" - Marca: {veiculo[0]}")
+            print(f" - Modelo: {veiculo[1]}")
+            print(f" - Placa: {veiculo[2]}")
+            i += 1
+
+def excluir():
+    listar()
+    print("Digite a placa que deseja excluir")
+    placa = input()
+    encontrou = False
+    for veiculo in listaVeiculos:
+        if veiculo[2] == placa:
+            listaVeiculos.remove(veiculo)
+            encontrou = True
+            break
+    if encontrou:
+        print("Veículo excluído")
+    else:
+        print("Veículo não encontrado")
 
 
 while True:
@@ -22,11 +50,11 @@ while True:
     except:
         print("Opção Inválida")
     if opcao == 1:
-        print("Cadastro")
+        cadastrar()
     elif opcao == 2:
-        print("Listar")
+        listar()
     elif opcao == 3:
-        print("Excluir")
+        excluir()
     elif opcao == 0:
         break
     else:
