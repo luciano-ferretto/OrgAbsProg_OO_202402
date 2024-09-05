@@ -21,10 +21,7 @@ def listar():
         i = 1
         for veiculo in listaVeiculos:
             print(f"Veículo: {i}")
-            print(f" - Marca: {veiculo.marca}")
-            print(f" - Modelo: {veiculo.modelo}")
-            print(f" - Placa: {veiculo.placa}")
-            print(f" - Ano: {veiculo.ano}")
+            print(f" - {veiculo}")
             i += 1
 
 def excluir():
@@ -33,7 +30,7 @@ def excluir():
     placa = input()
     encontrou = False
     for veiculo in listaVeiculos:
-        if veiculo[2] == placa:
+        if veiculo.get_placa() == placa:
             listaVeiculos.remove(veiculo)
             encontrou = True
             break
