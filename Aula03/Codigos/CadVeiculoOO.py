@@ -2,7 +2,10 @@ from Carro import Carro
 from Moto import Moto
 from Veiculo import Veiculo
 #BD em memória
-listaVeiculos = []
+listaVeiculos = [
+    Carro("Hyundai", "HB20", "ABC", 2023, 4),
+    Moto("Yamaha", "Lander", "DEF", 2008, 250)
+]
 
 def cadastrar():
     print("Qual o tipo de veículo: (1) Carro - (2) Moto")
