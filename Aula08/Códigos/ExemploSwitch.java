@@ -1,6 +1,10 @@
+import java.util.Random;
+
 public class ExemploSwitch {
     public static void main(String[] args) {
-        int numero = 1;
+        Random geradorAleatorio = new Random();
+        int numero = geradorAleatorio.nextInt(101);
+        
         switch (numero) {
             case 1:
                 System.out.println("Número UM");
