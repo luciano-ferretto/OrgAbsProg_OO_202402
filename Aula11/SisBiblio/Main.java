@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -5,9 +6,27 @@ public class Main {
     static Biblioteca biblio = new Biblioteca();
     static Scanner input = new Scanner(System.in);
 
-    private static void listar(){
-        //List<Livro> livros = biblio.pesquisarTodos();
+    private static int inputNumerico(String mensagem) {
+        int valor = 0;
+        boolean entradaValida = false;
+        System.out.println(mensagem);
+        do {
+            String valorStr = input.nextLine();
+            try {
+                valor = Integer.parseInt(valorStr);
+                entradaValida = true;
+            } catch (Exception e) {
+                System.out.println("Erro. Por favor informe um número Inteiro");
+            }
+        } while (!entradaValida);
+        return valor;
+    }
+
+    private static void listar() {
+        // List<Livro> livros = biblio.pesquisarTodos();
         var livros = biblio.pesquisarTodos();
+        livros.sort(Comparator.comparing(Livro::getTitulo));
+
         System.out.println("======== LISTA DE LIVROS =========");
         for (Livro livro : livros) {
             System.out.println("Título: " + livro.getTitulo());
@@ -29,19 +48,24 @@ public class Main {
 
         System.out.print("Informe o ano de publicação: ");
         novoLivro.setAnoPublicacao(input.nextInt());
-        input.nextLine(); //buffer
+        input.nextLine(); // buffer
 
         System.out.print("Informe o número de páginas: ");
         novoLivro.setnPaginas(input.nextInt());
-        input.nextLine(); //buffer
+        input.nextLine(); // buffer
 
-        biblio.adicionar(novoLivro);
-        System.out.println("Livro adicionado com Sucesso!");
-        input.nextLine(); //espera o usuário dar um enter para continuar
+        try {
+            biblio.adicionar(novoLivro);
+            System.out.println("Livro adicionado com Sucesso!");
+        } catch (Exception e) {
+            System.out.println("ERRO: " + e.getMessage());
+        }
+        
+        input.nextLine(); // espera o usuário dar um enter para continuar
     }
 
     public static void main(String[] args) {
-        
+
         String menu = """
                 SISTEMA DE GERENCIAMENTO DE BIBLIOTECA
                 Escolha uma das opções:
@@ -53,9 +77,10 @@ public class Main {
                 """;
         int opcao;
         do {
-            System.out.println(menu);
-            opcao = input.nextInt();
-            input.nextLine(); //limpar buffer
+            //System.out.println(menu);
+            //opcao = input.nextInt();
+            //input.nextLine(); // limpar buffer
+            opcao = inputNumerico(menu);
             switch (opcao) {
                 case 0:
                     System.out.println("VOLTE SEMPRE!!!");
@@ -67,10 +92,10 @@ public class Main {
                     listar();
                     break;
                 case 3:
-                    //pesquisar por titulo
+                    // pesquisar por titulo
                     break;
                 case 4:
-                    //remover
+                    // remover
                     break;
                 default:
                     System.out.println("Opção Inválida!!!");
