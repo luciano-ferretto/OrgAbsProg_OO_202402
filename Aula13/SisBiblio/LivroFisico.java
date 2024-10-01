@@ -13,6 +13,12 @@ public class LivroFisico extends Livro {
     public void setDimensoes(String dimensoes) {
         this.dimensoes = dimensoes;
     }
-    
+    @Override
+    public String toString() {
+        String descricao = "Título: " + this.getTitulo()
+                            + " - Autor: " + this.getAutor()
+                            + " - Ano: " + this.getAnoPublicacao();
+        return "Livro Físico: " + descricao + " - Dimensões: " + this.getDimensoes();
+    }
     
 }

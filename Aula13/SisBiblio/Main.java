@@ -39,8 +39,8 @@ public class Main {
 
         System.out.println("======== LISTA DE LIVROS =========");
         for (Livro livro : livros) {
-            System.out.println(livro);
-            //System.out.println(livro.toString());
+            //System.out.println(livro);
+            System.out.println(livro.toString());
             System.out.println("------------------------------------");
         }
         aguardarEnter();
@@ -98,7 +98,7 @@ public class Main {
         System.out.println("====== PESQUISAR LIVROS ======");
         System.out.print("Insira o titulo do livro: ");
         String titulo = input.nextLine();
-        var livros = biblio.pesquisarPorTitulo(titulo);
+        var livros = biblio.pesquisar(titulo);
         if (livros.isEmpty())
             System.out.println("Não foram encontrados livros com esta pesquisa.");
         else {

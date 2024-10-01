@@ -3,17 +3,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
-    //BD em memória
+    // BD em memória
     private List<Livro> acervo = new ArrayList<>();
 
-    public void adicionar(Livro livro) throws Exception{
+    public void adicionar(Livro livro) throws Exception {
         if (livro.getTitulo() == null || livro.getTitulo().isEmpty())
             throw new Exception("Não é permitido cadastrar livro sem título");
-        if(livro.getAutor() == null || livro.getAutor().isEmpty()) 
+        if (livro.getAutor() == null || livro.getAutor().isEmpty())
             throw new Exception("Não e possível cadastar um livro sem autor!");
-        if(livro.getAnoPublicacao() < 1400 || livro.getAnoPublicacao() > LocalDate.now().getYear())
+        if (livro.getAnoPublicacao() < 1400 || livro.getAnoPublicacao() > LocalDate.now().getYear())
             throw new Exception("Coloque um ano de publição valido! (Maior que 1400 e menor ou igual o ano atual)");
-        if(livro.getnPaginas() <= 0)
+        if (livro.getnPaginas() <= 0)
             throw new Exception("Coloque um número de páginas válido! (O número não pode ser negativo ou 0)");
         for (Livro livroAcervo : acervo) {
             if (livroAcervo.getTitulo().equalsIgnoreCase(livro.getTitulo()))
@@ -22,19 +22,25 @@ public class Biblioteca {
         acervo.add(livro);
     }
 
-    public List<Livro> pesquisarPorTitulo(String titulo){
+    public List<Livro> pesquisar(String titulo) {
+        return pesquisar(titulo, null);
+    }
+    public List<Livro> pesquisar(String titulo, String autor) {
         List<Livro> livrosEncontrados = new ArrayList<>();
 
         for (Livro livro : acervo) {
             if (livro.getTitulo().toLowerCase().contains(titulo.toLowerCase())) {
-                livrosEncontrados.add(livro);
+                if (autor == null
+                        || livro.getAutor().toLowerCase().contains(autor.toLowerCase())) {
+                    livrosEncontrados.add(livro);
+                }
             }
         }
 
         return livrosEncontrados;
     }
 
-    public void removerPorTitulo(String titulo) throws Exception{
+    public void removerPorTitulo(String titulo) throws Exception {
         boolean livroRemovido = false;
         for (Livro livro : acervo) {
             if (livro.getTitulo().equalsIgnoreCase(titulo)) {
@@ -47,8 +53,8 @@ public class Biblioteca {
             throw new Exception("Livro não encontrado com este título");
     }
 
-    public List<Livro> pesquisarTodos(){
+    public List<Livro> pesquisarTodos() {
         return this.acervo;
     }
-    
+
 }

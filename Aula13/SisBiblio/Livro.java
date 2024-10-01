@@ -27,5 +27,13 @@ public class Livro {
     public void setnPaginas(int nPaginas) {
         this.nPaginas = nPaginas;
     }
+    @Override
+    public String toString() {
+        String descricao = "Título: " + this.getTitulo()
+                            + " - Autor: " + this.getAutor()
+                            + " - Ano: " + this.getAnoPublicacao();
+        return descricao;
+    }
 
+    
 }
