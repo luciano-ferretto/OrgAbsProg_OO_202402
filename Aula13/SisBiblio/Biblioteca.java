@@ -6,12 +6,15 @@ public class Biblioteca {
     // BD em memória
     private List<Livro> acervo = new ArrayList<>();
 
+    private final  int ANO_PUBLICACAO_MINIMO = 1400;
+
+
     public void adicionar(Livro livro) throws Exception {
         if (livro.getTitulo() == null || livro.getTitulo().isEmpty())
             throw new Exception("Não é permitido cadastrar livro sem título");
         if (livro.getAutor() == null || livro.getAutor().isEmpty())
             throw new Exception("Não e possível cadastar um livro sem autor!");
-        if (livro.getAnoPublicacao() < 1400 || livro.getAnoPublicacao() > LocalDate.now().getYear())
+        if (livro.getAnoPublicacao() < ANO_PUBLICACAO_MINIMO || livro.getAnoPublicacao() > LocalDate.now().getYear())
             throw new Exception("Coloque um ano de publição valido! (Maior que 1400 e menor ou igual o ano atual)");
         if (livro.getnPaginas() <= 0)
             throw new Exception("Coloque um número de páginas válido! (O número não pode ser negativo ou 0)");

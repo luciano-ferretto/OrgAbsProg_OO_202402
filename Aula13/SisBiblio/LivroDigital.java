@@ -1,4 +1,4 @@
-public class LivroDigital extends Livro {
+public final class LivroDigital extends Livro {
     private double tamanhoArquivo;
     private String formatoArquivo;
 
@@ -20,10 +20,13 @@ public class LivroDigital extends Livro {
 
     @Override
     public String toString() {
-        String descricao = "Título: " + this.getTitulo()
-                + " - Autor: " + this.getAutor()
-                + " - Ano: " + this.getAnoPublicacao();
-        return "Livro Digital: " + descricao + " - Formato: " + this.getFormatoArquivo();
+        String descricao = super.toString();
+        return descricao + " - Formato: " + this.getFormatoArquivo();
+    }
+
+    @Override
+    public String getFormato() {
+        return "Livro Digital";
     }
 
 }

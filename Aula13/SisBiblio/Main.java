@@ -39,7 +39,8 @@ public class Main {
 
         System.out.println("======== LISTA DE LIVROS =========");
         for (Livro livro : livros) {
-            //System.out.println(livro);
+            // System.out.println(livro);
+            System.out.println(livro.getFormato());
             System.out.println(livro.toString());
             System.out.println("------------------------------------");
         }
@@ -48,16 +49,19 @@ public class Main {
 
     private static void adicionar() {
         limparTela();
-        Livro novoLivro;
+        Livro novoLivro = null;
         System.out.println("======== ADICIONANDO NOVO LIVRO ========");
-        int tipoLivro = inputNumerico("Qual o tipo de livro: (1) Físico - (2) Digital");
-        if (tipoLivro == 1) {
-            novoLivro = new LivroFisico();
-        } else if (tipoLivro == 2) {
-            novoLivro = new LivroDigital();
-        } else {
-            novoLivro = new Livro();
-        }
+        int tipoLivro;
+        do {
+            tipoLivro = inputNumerico("Qual o tipo de livro: (1) Físico - (2) Digital");
+            if (tipoLivro == 1) {
+                novoLivro = new LivroFisico();
+            } else if (tipoLivro == 2) {
+                novoLivro = new LivroDigital();
+            } else {
+                System.out.println("Opção");
+            }
+        } while (novoLivro == null);
         System.out.print("Informe o título do livro: ");
         String titulo = input.nextLine();
         novoLivro.setTitulo(titulo);
@@ -77,7 +81,7 @@ public class Main {
             System.out.println("Digite as dimensões: ");
             String dimensoes = input.nextLine();
             ((LivroFisico) novoLivro).setDimensoes(dimensoes);
-        } else if (tipoLivro == 2){
+        } else if (tipoLivro == 2) {
             System.out.println("Digite o formato do arquivo: ");
             String formatoArquivo = input.nextLine();
             ((LivroDigital) novoLivro).setFormatoArquivo(formatoArquivo);
@@ -112,7 +116,7 @@ public class Main {
         }
         aguardarEnter();
     }
-    
+
     private static void removerPorTitulo() {
         limparTela();
         System.out.println("====== EXCLUIR LIVRO ======");
