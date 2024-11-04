@@ -5,11 +5,6 @@ public class Main {
         cestaFrutas.inserir(new Fruta("Pera"));
         cestaFrutas.inserir(new Fruta("laranja"));
         fazerSaladaDeFrutas(cestaFrutas);
-
-        Cesta cestaGatos = new Cesta(20);
-        cestaGatos.inserir(new Gato("Miuki"));
-        cestaGatos.inserir(new Gato("Mimi"));
-        fazerSaladaDeFrutas(cestaGatos);
     }
 
     public static Fruta[] fazerSaladaDeFrutas(Cesta cestaFrutas) {
