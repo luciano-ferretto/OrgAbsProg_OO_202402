@@ -1,16 +1,16 @@
-public class Cesta {
-    private Object[] itens;
+public class Cesta<E> {
+    private E[] itens;
     private int tamanhoAtual;
     
     
     // Construtor para inicializar a cesta com um tamanho fixo
     public Cesta(int capacidade) {
-        itens = new Object[capacidade];
+        itens = (E[]) new Object[capacidade];
         tamanhoAtual = 0;
     }
 
     // Método para inserir um objeto na cesta
-    public void inserir(Object o) {
+    public void inserir(E o) {
         if (tamanhoAtual < itens.length) {
             itens[tamanhoAtual++] = o; //LEMBREM-SE: o operador ++ é pós-fixado, ou seja, ele incrementa a variável após a atribuição
         } else {
@@ -18,9 +18,9 @@ public class Cesta {
         }
     }
     // Método para obter o último objeto adicionado na cesta e removê-lo (LIFO)
-    public Object getProximo() {
+    public E getProximo() {
         if (tamanhoAtual > 0) {
-            Object item = itens[--tamanhoAtual]; //LEMBREM-SE: o operador -- é pré-fixado, ou seja, ele decrementa a variável antes da atribuição
+            E item = itens[--tamanhoAtual]; //LEMBREM-SE: o operador -- é pré-fixado, ou seja, ele decrementa a variável antes da atribuição
             itens[tamanhoAtual] = null; // Remove referência para permitir garbage collection
             return item;
         } else {
