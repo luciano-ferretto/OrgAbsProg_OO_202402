@@ -5,10 +5,19 @@ import java.util.regex.Pattern;
 import org.springframework.stereotype.Service;
 
 import br.edu.atitus.apisample.entities.UserEntity;
+import br.edu.atitus.apisample.repositories.UserRepository;
 
 //Spring, gerencia objetos dessa classe pra mim
 @Service 
 public class UserService {
+	// Essa classe possui uma dependência de um objeto UserRepository
+	private final UserRepository repository;
+	// No método construtor existe a injeção de dependência
+	public UserService(UserRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
 	private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 
@@ -33,7 +42,13 @@ public class UserService {
 		
 		newUser.setEmail(newUser.getEmail().trim());
 		
-		// TODO Invocar método camada repository
+		if (repository.existsByEmail(newUser.getEmail()))
+			throw new Exception("Já existe usuário com este e-mail!");
+		
+		// Invocar método camada repository
+		this.repository.save(newUser);
+		
+		
 		return newUser;
 	}
 
